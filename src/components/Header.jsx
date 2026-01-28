@@ -16,19 +16,16 @@ export default function Header() {
 
   return (
     <>
-      {/* HEADER */}
-      <header className=" top-0 left-0 right-0 z-50 bg-cyan-900">
+      <header className=" top-0 left-0 right-0 z-50 bg-[#113f5e]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          {/* FIXED HEADER HEIGHT */}
           <div className="h-16 md:h-20 flex items-center justify-between">
-            {/* LOGO */}
             <motion.a
               href="#"
               whileHover={{ scale: 1.03 }}
               className="relative flex items-center"
             >
               <img
-                src="/Named_Full_Logo.png"
+                src="/ebsor.jpeg"
                 alt="EBSOR Infosystems"
                 className="
                   max-h-10

@@ -28,7 +28,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-slate-900">
+    <section className="relative min-h-screen overflow-hidden bg-cyan-800">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
@@ -38,7 +38,7 @@ export default function HeroSection() {
           transition={{ duration: 0.2 }}
           className="absolute inset-0"
         >
-          {/* Background Image */}
+         
           <img
             src={slides[index].image}
             alt="Hero Slide"
