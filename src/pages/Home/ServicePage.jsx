@@ -259,39 +259,7 @@ const ServicePage = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 text-white py-20">
-        <div className="container mx-auto px-6 lg:px-20 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl lg:text-5xl font-bold mb-6"
-          >
-            Ready to Transform Your Business?
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-white/80 mb-8 max-w-2xl mx-auto"
-          >
-            Let's discuss how our services can help you achieve your goals
-          </motion.p>
-          <motion.button
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="px-10 py-4 bg-white text-blue-900 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors shadow-2xl"
-            whileHover={{ scale: 1.05, y: -5 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Contact Us Now
-          </motion.button>
-        </div>
-      </div>
+     
     </div>
   );
 };

@@ -40,7 +40,7 @@ export default function FeaturesSlider() {
   };
 
   return (
-    <section className="relative  bg-gradient-to-br from-cyan-950 via-cyan-900 to-blue-950 overflow-hidden">
+    <section className="relative  bg-gradient-to-br bg-linear-to-br from-cyan-950 via-blue-950 to-cyan-950 overflow-hidden">
       {/* BACKGROUND ELEMENTS (REDUCED) */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -57,8 +57,6 @@ export default function FeaturesSlider() {
 
       {/* HEADER */}
       <div className="relative max-w-7xl mx-auto px-10 mb-7 text-center">
-       
-
         <h1 className="text-3xl md:text-4xl pt-5 font-bold bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent leading-tight">
           Efficient ERP Solutions
           <br />
@@ -151,7 +149,7 @@ export default function FeaturesSlider() {
       </div>
 
       {/* LOGO SELECTOR */}
-      <div className="relative max-w-7xl mx-auto px-6 mt-14">
+      <div className="relative max-w-7xl mx-auto px-6 py-14">
         <div className="flex justify-around items-center py-4">
           {ERP_FEATURES.map((item, i) => (
             <button

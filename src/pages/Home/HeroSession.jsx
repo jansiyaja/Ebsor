@@ -28,7 +28,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-cyan-800">
+    <section className="relative min-h-screen overflow-hidden bg-[#113f5e]">
       <AnimatePresence mode="wait">
         <motion.div
           key={index}
@@ -38,7 +38,6 @@ export default function HeroSection() {
           transition={{ duration: 0.2 }}
           className="absolute inset-0"
         >
-         
           <img
             src={slides[index].image}
             alt="Hero Slide"
@@ -52,7 +51,7 @@ export default function HeroSection() {
             <div className="text-center max-w-4xl">
               <h1 className="relative inline-block text-white text-4xl sm:text-5xl md:text-6xl font-bold mb-8">
                 Powering Connected Businesses
-            </h1>
+              </h1>
 
               <AnimatePresence mode="wait">
                 <motion.p

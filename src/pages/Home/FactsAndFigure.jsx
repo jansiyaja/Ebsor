@@ -168,7 +168,7 @@ const stats = [
       </svg>
       {/* Content */}
       <div className="relative z-10 h-full flex items-center px-6">
-        <div className="w-full max-w-6xl mx-auto space-y-10">
+        <div className="w-full max-w-6xl mx-auto space-y-5">
           {/* Heading */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

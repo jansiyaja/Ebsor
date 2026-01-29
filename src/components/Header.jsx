@@ -19,23 +19,24 @@ export default function Header() {
       <header className=" top-0 left-0 right-0 z-50 bg-[#113f5e]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="h-16 md:h-20 flex items-center justify-between">
-            <motion.a
-              href="#"
+            <motion.div
               whileHover={{ scale: 1.03 }}
-              className="relative flex items-center"
+              className="relative inline-block cursor-pointer"
             >
-              <img
-                src="/ebsor.jpeg"
-                alt="EBSOR Infosystems"
-                className="
-                  max-h-10
-                  md:max-h-12
-                  lg:max-h-14
-                  w-auto
-                  object-contain
-                "
-              />
-            </motion.a>
+              <a href="#" aria-label="EBSOR Infosystems home">
+                <img
+                  src="/ebsor.jpeg"
+                  alt="EBSOR Infosystems"
+                  className="
+        max-h-10
+        md:max-h-12
+        lg:max-h-14
+        w-auto
+        object-contain
+      "
+                />
+              </a>
+            </motion.div>
 
             {/* DESKTOP NAV */}
             <nav className="hidden lg:flex items-center gap-2">
