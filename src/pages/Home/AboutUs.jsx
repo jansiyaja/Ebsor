@@ -1,49 +1,37 @@
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { TextureLoader } from "three";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Sphere, Float } from "@react-three/drei";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-/* ===================== 3D IMAGE CUBE ===================== */
+/* ===================== 3D STORY CORE ===================== */
 
-function ImageCube({ progress }) {
-  const cubeRef = useRef();
-
-  const textures = useLoader(TextureLoader, [
-    // Vision
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
-    // Clients
-    "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80",
-    // Team
-    "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80",
-    // Growth
-    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-  ]);
+function StoryCore({ progress }) {
+  const mesh = useRef();
 
   useFrame(() => {
-    if (!cubeRef.current) return;
-
-    // Scroll-based rotation (storytelling feel)
-    cubeRef.current.rotation.y = progress * Math.PI * 1.5;
-    cubeRef.current.rotation.x = progress * Math.PI * 0.25;
+    if (!mesh.current) return;
+    mesh.current.rotation.y += 0.002;
+    mesh.current.rotation.x += 0.001;
+    mesh.current.scale.setScalar(1.15 + progress * 0.5);
   });
 
   return (
-    <mesh ref={cubeRef} scale={2.2}>
-      <boxGeometry args={[1.6, 1.6, 1.6]} />
-      {textures.map((texture, i) => (
+    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+      <Sphere ref={mesh} args={[1.3, 64, 64]}>
         <meshStandardMaterial
-          key={i}
-          attach={`material-${i}`}
-          map={texture}
+          color="#0ea5e9"
+          roughness={0.25}
+          metalness={0.85}
+          wireframe
         />
-      ))}
-    </mesh>
+      </Sphere>
+    </Float>
   );
 }
 
-/* ===================== MAIN STORY SECTION ===================== */
+/* ===================== MAIN SECTION ===================== */
 
-export default function AboutStoryCube() {
+export default function AboutUs() {
   const containerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -51,68 +39,105 @@ export default function AboutStoryCube() {
     offset: ["start end", "end start"],
   });
 
-  const glowOpacity = useTransform(scrollYProgress, [0, 1], [0.12, 0.4]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 1], [0.1, 0.35]);
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  const sections = [
+    {
+      id: "01",
+      title: "Where It All Began",
+      content:
+        "Founded in 2012, EBSOR Infosystems started with one belief — technology should simplify decisions, not complicate them.",
+    },
+    {
+      id: "02",
+      title: "Listening Before Building",
+      content:
+        "By understanding client challenges deeply, we aligned IT with business intent — creating solutions that scale naturally.",
+    },
+    {
+      id: "03",
+      title: "Expertise That Evolves",
+      content:
+        "Our strength is a team that never stops learning — delivering innovation with precision, reliability, and trust.",
+    },
+    {
+      id: "04",
+      title: "Transformation at Scale",
+      content:
+        "Today, we lead organizations through digital transformation — transferring skills, clarity, and confidence.",
+    },
+  ];
 
   return (
-    <section
-      ref={containerRef}
-      className="relative bg-white overflow-hidden"
-    >
-      {/* ===================== STICKY 3D SCENE ===================== */}
-      <div className="sticky top-0 h-screen -z-10">
+    <section ref={containerRef} className="relative bg-white overflow-hidden">
+      {/* ===================== BACKGROUND 3D ===================== */}
+      <div className="absolute inset-0 -z-10">
         <Canvas camera={{ position: [0, 0, 5] }}>
-          <ambientLight intensity={0.9} />
-          <directionalLight position={[4, 4, 6]} intensity={1.5} />
-          <ImageCube progress={scrollYProgress.get()} />
+          <ambientLight intensity={0.6} />
+          <directionalLight position={[5, 5, 5]} intensity={1.2} />
+          <StoryCore progress={scrollYProgress.get()} />
         </Canvas>
 
-        {/* Soft cinematic overlay */}
+        {/* Soft cinematic glow */}
         <motion.div
           style={{ opacity: glowOpacity }}
           className="absolute inset-0 bg-gradient-to-b from-sky-100/40 via-transparent to-indigo-100/40"
         />
       </div>
 
-      {/* ===================== STORY CONTENT ===================== */}
-      <div className="relative max-w-6xl mx-auto px-6 py-[120vh]">
-        <div className="space-y-40 max-w-2xl">
-          {[
-            {
-              title: "Our Vision",
-              text:
-                "We started with one belief — technology should simplify complexity and unlock better decisions.",
-            },
-            {
-              title: "Built on Trust",
-              text:
-                "Every partnership is shaped by transparency, collaboration, and long-term value creation.",
-            },
-            {
-              title: "People Behind Progress",
-              text:
-                "A passionate team of thinkers, builders, and innovators driving meaningful solutions.",
-            },
-            {
-              title: "Scaling the Future",
-              text:
-                "We help organizations evolve digitally with confidence, clarity, and sustainable growth.",
-            },
-          ].map((item, i) => (
+      {/* ===================== CONTENT ===================== */}
+      <div className="relative max-w-6xl mx-auto px-6 py-24">
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-bold text-sky-900 mb-24 max-w-3xl"
+        >
+          A Journey Shaped by Vision, Trust & Transformation
+        </motion.h2>
+
+        {/* ===================== TIMELINE ===================== */}
+        <div className="relative grid grid-cols-[60px_1fr] gap-x-12">
+          {/* Vertical line */}
+          <div className="relative flex justify-center">
+            <div className="w-px bg-gray-200 h-full" />
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h3 className="text-3xl font-bold text-sky-900 mb-4">
-                {item.title}
-              </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                {item.text}
-              </p>
-            </motion.div>
-          ))}
+              style={{ height: lineHeight }}
+              className="absolute top-0 w-px bg-sky-600"
+            />
+          </div>
+
+          {/* Story blocks */}
+          <div className="space-y-32">
+            {sections.map((section, index) => (
+              <motion.div
+                key={section.id}
+                initial={{ opacity: 0, y: 80 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, delay: index * 0.08 }}
+                viewport={{ once: true, amount: 0.5 }}
+                className="relative"
+              >
+                {/* Chapter Badge */}
+                <div className="absolute -left-[92px] top-2 w-14 h-14 rounded-2xl bg-sky-900 text-white flex items-center justify-center text-lg font-bold shadow-lg">
+                  {section.id}
+                </div>
+
+                {/* Content */}
+                <div className="max-w-2xl">
+                  <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">
+                    {section.title}
+                  </h3>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    {section.content}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
